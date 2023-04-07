@@ -46,6 +46,7 @@ The following tools and packages are required to run the script:
 - The db_autpwn plugin for Metasploit is deprecated.
 - The script offers no error checking or validation.
 - Uses hardcoded paths to the main folders and files, which could cause issues if the user changes the directory structure or if the script is run on a different machine.
+- This script is NOISY.
 
 ## Conclusion
 
