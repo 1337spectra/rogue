@@ -1,4 +1,5 @@
 # Rogue.sh
+Video playthrough can be seen here: [https://youtu.be/YNRqINIU3Is](https://youtu.be/YNRqINIU3Is)
 
 ## Introduction
 
