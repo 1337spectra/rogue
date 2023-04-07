@@ -107,25 +107,14 @@ Overall, Rogue's extensive capabilities and flexibility lay the foundation for a
 References
 ----------
 Adams, Heath. 2022. _Practical Ethical Hacking - The Complete Course_. Accessed April 7, 2023. www.academy.tcm-sec.com.
-
 Baird, Lee. 2023. "Discover." March 23. www.github.com/leebaird/discover.
-
 Cannon, Jason. 2015. _Shell scripting: How to automate command line tasks using bash scripting and Shell Programming_. Createspace Independent.
-
 Easttom, Chuck. 2018. _Penetration testing fundamentals: A hands-on guide to reliable security audits_. Pearson.
-
 fsociety-team. 2023. "fsociety: Modular Penetration Testing Framework." April 5. www.github.com/fsociety-team/fsociety.
-
 johnjohnsp1. 2018. "Pure Blood v1." July 13. www.github.com/johnjohnsp1/pureblood.
-
 Johnson, Chris, and Jayant Varma. 2015. _Pro bash programming scripting the GNU/linux shell_. Apress.
-
 Kennedy, David. 2011. _Metasploit the penetration tester's guide_. No Starch Press.
-
 Malik, Suleman. 2023. "Recox: Web Application Vulnerability Finder." February 17. www.github.com/samhaxr/recox.
-
 n.d. "Penetration Testing Execution Standard (PTES)." Accessed April 7, 2023. www.pentest-standard.org.
-
 Rahalkar, Sagar, and Nipun Jaswal. 2017. _Metasploit revealed: Secrets of the expert Pentester_. Packt Publishing.
-
 Sn1perSecurity, LLC. 2023. "Sn1per." March 9. www.github.com/1N3/Sn1per.
