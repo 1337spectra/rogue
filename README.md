@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Rogue.sh is a Bash script developed as part of my Honor's project for a Linux class. Its purpose is to showcase my proficiency in Linux and my aspirations of becoming a penetration tester. Rogue.sh is designed to identify and exploit vulnerabilities in Linux-based systems by performing an Nmap scan, setting up Metasploit, running exploits and post-exploit tasks, and parsing the Nmap XML output.
+Rogue.sh is a Bash script developed as part of my Honor's project for a Linux class. Its purpose is to showcase my proficiency in Linux and my aspirations of becoming a penetration tester. Rogue.sh is designed to identify and exploit vulnerabilities in Linux-based systems by performing an Nmap scan, setting up Metasploit, running exploits and post-exploit tasks, and parsing the Nmap XML output. Instead of reinventing the wheel, it makes use of existing projects and combines them all to provide an automated experience.
 
 With its automated approach, Rogue.sh provides a comprehensive overview of the target system's vulnerabilities and security measures, making it easier to identify potential attack vectors. This streamlined process saves time and effort that would otherwise be spent manually running each exploit and collecting data from the target system. By ensuring consistency across different testing environments, Rogue.sh is an effective tool for assessing the security of a target system.
 
