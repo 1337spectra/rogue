@@ -6,6 +6,8 @@ Rogue.sh is a Bash script developed as part of my Honor's project for a Linux cl
 
 With its automated approach, Rogue.sh provides a comprehensive overview of the target system's vulnerabilities and security measures, making it easier to identify potential attack vectors. This streamlined process saves time and effort that would otherwise be spent manually running each exploit and collecting data from the target system. By ensuring consistency across different testing environments, Rogue.sh is an effective tool for assessing the security of a target system.
 
+It is important to note that I have no experience with the Bash or Ruby programming languages prior to this project. I was learning as I went and thus the code is likely very ugly. I am sure there are plenty of ways something could have been written more efficiently, and I would love to hear those suggestions, but please be aware that I am aware of it's unsightliness.
+
 ## Features
 
 - Scans the target machine for vulnerabilities using Nmap with the vulners script.
