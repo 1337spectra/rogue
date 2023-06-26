@@ -29,23 +29,23 @@ It is important to note that I have no experience with the Bash or Ruby programm
 4. Run the following command to give execution permission to the script: `chmod +x rogue.sh`
 5. Run the script as the root user by executing the following command: `sudo ./rogue.sh`
 
-The script begins by checking whether it is being run as root user, which is essential for some of the later operations. Next, it sets the main path for the project and creates directories for reports, modules, credentials, and files.
+1. The script begins by checking whether it is being run as root user, which is essential for some of the later operations. Next, it sets the main path for the project and creates directories for reports, modules, credentials, and files.
 
 ![Screenshot 1](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/1.jpg)
 
-The script then downloads `nmap-parse-output` and the Metasploit plugin `autopwn`. The first action function is the `nmap_()` function, which scans the target system for vulnerabilities using the Nmap tool. It uses various flags to perform a thorough scan and generate a report in XML format. The report is then saved to the reports directory.
+2. The script then downloads `nmap-parse-output` and the Metasploit plugin `autopwn`. The first action function is the `nmap_()` function, which scans the target system for vulnerabilities using the Nmap tool. It uses various flags to perform a thorough scan and generate a report in XML format. The report is then saved to the reports directory.
 
 ![Screenshot 2](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/2.jpg)
 
-The `createAuto_()` function creates an module that automates the exploitation process. The module uses db_autopwn to exploit vulnerabilities found in the scan and opens sessions to the target. The function then dumps and saves the session IDs and opens a Meterpreter shell in any session opened by the exploit. The `port_cleaner.rc` file is executed to clean up any open ports after the exploit.
+3. The `createAuto_()` function creates an module that automates the exploitation process. The module uses db_autopwn to exploit vulnerabilities found in the scan and opens sessions to the target. The function then dumps and saves the session IDs and opens a Meterpreter shell in any session opened by the exploit. The `port_cleaner.rc` file is executed to clean up any open ports after the exploit.
 
 ![Screenshot 3](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/3.jpg)
 
-The `createPost_()` function creates a post-exploitation module that gathers information from the target system, including credentials and system configurations. It is called at the end of the `createAuto_()` function and downloads important files such as `/etc/passwd`, `/etc/shadow`, and `/etc/group` to the creds directory.
+4. The `createPost_()` function creates a post-exploitation module that gathers information from the target system, including credentials and system configurations. It is called at the end of the `createAuto_()` function and downloads important files such as `/etc/passwd`, `/etc/shadow`, and `/etc/group` to the creds directory.
 
 ![Screenshot 4](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/4.jpg)
 
-The `createCreds_()` function creates a password cracking module that uses the John the Ripper password cracker to crack the password hashes stored in the shadow file. It is called at the end of the `createPost_()` function.
+5. The `createCreds_()` function creates a password cracking module that uses the John the Ripper password cracker to crack the password hashes stored in the shadow file. It is called at the end of the `createPost_()` function.
 
 ![Screenshot 5](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/5.jpg)
 
