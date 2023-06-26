@@ -84,3 +84,10 @@ Rogue offers a valuable framework for streamlining the vulnerability assessment 
 However, it is crucial to emphasize that Rogue.sh, like any penetration testing tool, must be used ethically and with explicit permission from the system owner. Caution should be exercised to prevent any potential damage or disruption to the target system.
 
 Overall, Rogue's extensive capabilities and flexibility lay the foundation for an essential tool for security professionals who require an efficient and customizable solution for vulnerability assessment and penetration testing.
+
+
+## License
+
+This project is licensed under the terms of the GNU General Public License v3.0.
+
+A copy of the license can be found in the LICENSE.txt file.
