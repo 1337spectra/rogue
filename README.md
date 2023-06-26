@@ -90,4 +90,4 @@ Overall, Rogue's extensive capabilities and flexibility lay the foundation for a
 
 This project is licensed under the terms of the GNU General Public License v3.0.
 
-A copy of the license can be found in the LICENSE.txt file.
+A copy of the license can be found in the LICENSE file.
