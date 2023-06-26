@@ -1,7 +1,4 @@
 # Rogue.sh
-Video playthrough can be seen here: [https://youtu.be/YNRqINIU3Is](https://youtu.be/YNRqINIU3Is)
-
-## Introduction
 
 Rogue is a Bash script developed as an Honors project for my Linux class. Its purpose is to showcase my proficiency in Linux and my aspirations of becoming a penetration tester. Rogue is designed to identify and exploit vulnerabilities in Linux-based systems by performing an Nmap scan, setting up Metasploit, running exploits, and performing post-exploit tasks, as well as parsing the Nmap XML output. Rather than reinventing the wheel, it makes use of existing projects and combines them all to provide an automated framework.
 
@@ -9,25 +6,44 @@ With its automated approach, Rogue provides a comprehensive overview of the targ
 
 It is important to note that I have no experience with the Bash or Ruby programming languages prior to this project. I was learning as I went and thus the code is likely very ugly. I am sure there are plenty of ways something could have been written more efficiently, and I would love to hear those suggestions, but please be aware that I am aware of it's unsightliness.
 
-## Features
+## Getting Started
 
-- Scans target machine for vulnerabilities using Nmap with vulners script.
-- Sets up Metasploit environment with Nmap scan results.
-- Executes db_autopwn module to exploit vulnerabilities on target machine.
-- Downloads sensitive files such as `/etc/passwd` and `/etc/shadow`.
-- Gathers & cracks credentials from downloaded files with John the Ripper.
-- Executes post-exploitation modules to gather info & escalate privileges.
-- Generates easy-to-read HTML report of Nmap scan.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-## Usage
+### Prerequisites
 
-### Tl;dr
+- Kali Linux.
+- Bash shell
+- Root privileges for the user running the script.
+- PostgreSQL and PostgreSQL client packages.
+- `fdupes` utility for finding and deleting duplicate files.
+- `msfdb` for initializing Metasploit database.
+- `Nmap` network exploration tool.
+- `git` for cloning the nmap-parse-output repository.
+- `wget` for downloading the `db_autopwn.rb` Metasploit plugin.
+- Metasploit Framework.
+- John the Ripper password cracking tool.
+
+### Usage
+
+#### Tl;dr
 
 1. Connect the Metasploitable 2 VM to your local network.
 2. Download the script and save it to the Desktop of your local machine.
 3. Open a terminal and navigate to the Desktop containing the script.
-4. Run the following command to give execution permission to the script: `chmod +x rogue.sh`
-5. Run the script as the root user by executing the following command: `sudo ./rogue.sh`
+4. Run the following command to give execution permission to the script:
+
+```bash
+chmod +x rogue.sh
+```
+
+5. Run the script as the root user by executing the following command: 
+
+```bash
+sudo ./rogue.sh
+```
+
+6. Let Rogue work it's magic!
 
 ---
 
@@ -51,21 +67,6 @@ It is important to note that I have no experience with the Bash or Ruby programm
 
 ![Screenshot 5](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/5.jpg)
 
-## Dependencies
-
-The following tools and packages are required to run the script:
-- Kali Linux.
-- Bash shell 
-- Root privileges for the user running the script.
-- PostgreSQL and PostgreSQL client packages.
-- `fdupes` utility for finding and deleting duplicate files.
-- `msfdb` for initializing Metasploit database.
-- `Nmap` network exploration tool.
-- `git` for cloning the nmap-parse-output repository.
-- `wget` for downloading the `db_autopwn.rb` Metasploit plugin.
-- Metasploit Framework.
-- John the Ripper password cracking tool.
-
 ## Limitations
 
 - **Educational Use Only**: This script is intended for educational purposes and should not be used to exploit systems without proper authorization.
@@ -77,17 +78,21 @@ The following tools and packages are required to run the script:
 - **Assumption of User**: The script assumes that the user is running under the username 'kali'.
 - **Noisiness**: Rogue.sh generates significant noise during its execution, which may be detectable by network monitoring tools.
 
-## Conclusion
+## Contributing
 
-Rogue offers a valuable framework for streamlining the vulnerability assessment and penetration testing process. Its automation capabilities allow security professionals to save time and effort by automating various stages of the process, including vulnerability scanning, Metasploit setup, and password cracking. Additionally, Rogue is highly adaptable and can be tailored to meet the unique needs of different environments. The tool's ability to automatically exploit vulnerabilities and gather post-exploitation data makes it a powerful asset for identifying and addressing security weaknesses in Linux-based systems. 
+Please read [Contributing](https://github.com/1337spectra/rogue/wiki/03.-Contributing) for details on code of conduct, and the process for submitting pull requests.
 
-However, it is crucial to emphasize that Rogue.sh, like any penetration testing tool, must be used ethically and with explicit permission from the system owner. Caution should be exercised to prevent any potential damage or disruption to the target system.
+## Authors
 
-Overall, Rogue's extensive capabilities and flexibility lay the foundation for an essential tool for security professionals who require an efficient and customizable solution for vulnerability assessment and penetration testing.
-
+* **Gabrielle Decker** - *Initial work* - [https://1337spectra.github.io/](https://1337spectra.github.io/)
 
 ## License
 
-This project is licensed under the terms of the GNU General Public License v3.0.
+This project is licensed under the GPL v3 - see the [LICENSE.txt](https://github.com/1337spectra/rogue/blob/main/LICENSE.md) file for details
 
-A copy of the license can be found in the LICENSE file.
+
+## Acknowledgments
+
+* [db_autopwn.rb](https://github.com/hahwul/metasploit-autopwn)
+* [Nmap](https://github.com/nmap/nmap)
+* [Metasploit](https://github.com/rapid7/metasploit-framework)
