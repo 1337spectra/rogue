@@ -29,6 +29,7 @@ It is important to note that I have no experience with the Bash or Ruby programm
 4. Run the following command to give execution permission to the script: `chmod +x rogue.sh`
 5. Run the script as the root user by executing the following command: `sudo ./rogue.sh`
 
+
 1. The script begins by checking whether it is being run as root user, which is essential for some of the later operations. Next, it sets the main path for the project and creates directories for reports, modules, credentials, and files.
 
 ![Screenshot 1](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/1.jpg)
