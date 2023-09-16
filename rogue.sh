@@ -255,7 +255,7 @@ function cleanup_(){
     table_rows=""
     while read -r line; do
       table_row="<tr><td>${line%%:*}</td><td>${line#*:}</td></tr>"
-      if [[ "$line" != *"#"* ]] || [[ "$line" == *[^#\s]* ]]; then
+      if [[ "$line" != *"#"* ]] || [[ "$line" == *[^#'\s']* ]]; then
         if [ -n "$table_row" ]; then
           table_rows+="$table_row"
         fi
