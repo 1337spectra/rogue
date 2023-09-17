@@ -1,16 +1,10 @@
-# Rogue.sh
 
-Rogue is a Bash script developed as an Honors project for my Linux class. Its purpose is to showcase my proficiency in Linux and my aspirations of becoming a penetration tester. Rogue is designed to identify and exploit vulnerabilities in Linux-based systems by performing an Nmap scan, setting up Metasploit, running exploits, and performing post-exploit tasks, as well as parsing the Nmap XML output. Rather than reinventing the wheel, it makes use of existing projects and combines them all to provide an automated framework.
+# rogue.sh
 
-With its automated approach, Rogue provides a comprehensive overview of the target system's vulnerabilities and security measures, making it easier to identify potential attack vectors. This streamlined process saves time and effort that would otherwise be spent manually running each exploit and collecting data from the target system. By ensuring consistency across different testing environments, Rogue could be an effective tool for assessing the security of a target system.
+Rogue is a bash script designed to simplify penetration testing workflows for security professionals. It automates the scanning process with Nmap, configures Metasploit, executes exploits, harvests credentials with John the Ripper, generates professional reports, and performs cleanup. The script standardizes these processes to reduce manual labor and free analysts to concentrate on analysis. With only an IP address as input, the script aims to streamline processes while allowing experienced users to customize scans or bypass default behaviors as needed.
 
-It is important to note that I have no experience with the Bash or Ruby programming languages prior to this project. I was learning as I went and thus the code is likely very ugly. I am sure there are plenty of ways something could have been written more efficiently, and I would love to hear those suggestions, but please be aware that I am aware of it's unsightliness.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
+## Dependacies
 
 - Kali Linux.
 - Bash shell
@@ -23,77 +17,271 @@ These instructions will get you a copy of the project up and running on your loc
 - `wget` for downloading the `db_autopwn.rb` Metasploit plugin.
 - Metasploit Framework.
 - John the Ripper password cracking tool.
+## Features
 
-### Usage
+- Automates an end-to-end pentesting workflow via multiple functions
+- Scans target with Nmap to identify services and vulnerabilities  
+- Imports scan results into Metasploit for exploitation
+- Runsexploits and credential cracking to gain initial access
+- Extracts files, passwords and other OS intelligence
+- Identifies and sessions with elevated privileges 
+- Generates report from scan and post-exploitation data
+- Modular design allows customization of steps
+- Utilizes core pentesting tools like Nmap, Metasploit, John
+- Packages results for analysis while cleaning up artifacts
+## Installation
 
-#### Tl;dr
-
-1. Connect the Metasploitable 2 VM to your local network.
-2. Download the script and save it to the Desktop of your local machine.
-3. Open a terminal and navigate to the Desktop containing the script.
-4. Run the following command to give execution permission to the script:
+Open a terminal and clone the project.
 
 ```bash
-chmod +x rogue.sh
+  git clone https://github.com/1337spectra/rogue.git
 ```
 
-5. Run the script as the root user by executing the following command: 
+Navigate to the directory where the script was cloned to.
 
 ```bash
-sudo ./rogue.sh
+  cd rogue
 ```
 
-6. Let Rogue work it's magic!
+Make the script executable.
 
----
+```bash
+  chmod +x rogue.sh
+```
+## Usage
 
-#### How It Works
+1. Run the script as root:
 
-The script begins by checking whether it is being run as root user, which is essential for some of the later operations. Next, it sets the main path for the project and creates directories for reports, modules, credentials, and files.
+```bash
+  sudo ./rogue.sh
+```
 
-![Screenshot 1](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/1.jpg)
+2. Enter the target IP address when prompted.
 
-The script then downloads `nmap-parse-output` and the Metasploit plugin `autopwn`. The first action function is the `nmap_()` function, which scans the target system for vulnerabilities using the Nmap tool. It uses various flags to perform a thorough scan and generate a report in XML format. The report is then saved to the reports directory.
+```bash
+  [!] Enter Target IP Address: 127.0.0.1
+```
 
-![Screenshot 2](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/2.jpg)
+**Note**: Please ensure that the script is run with root privileges, as some commands require administrative access.
+## File Structure
 
-The `createAuto_()` function creates an module that automates the exploitation process. The module uses db_autopwn to exploit vulnerabilities found in the scan and opens sessions to the target. The function then dumps and saves the session IDs and opens a Meterpreter shell in any session opened by the exploit. The `port_cleaner.rc` file is executed to clean up any open ports after the exploit.
+The script creates the following directories:
 
-![Screenshot 3](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/3.jpg)
+1. `reports`: Contains the Nmap XML scan result and the generated HTML report.
+2. `modules`: Contains the `auto.rc`, `post.rc`, and `creds.rc` files used in Metasploit Framework.
+3. `creds`: Contains the cracked credentials and combined credentials file.
+4. `files`: Contains the extracted files from the target system.
 
-The `createPost_()` function creates a post-exploitation module that gathers information from the target system, including credentials and system configurations. It is called at the end of the `createAuto_()` function and downloads important files such as `/etc/passwd`, `/etc/shadow`, and `/etc/group` to the creds directory.
+```
+	Pentest
+	├── reports
+	│   ├── Nmap XML scan result
+	│   └── Generated HTML report
+	├── modules
+	│   ├── auto.rc
+	│   ├── post.rc
+	│   └── creds.rc
+	├── creds
+	│   ├── Cracked credentials
+	│   └── Combined credentials
+	└── files
+	    └── Extracted files from target
+```
 
-![Screenshot 4](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/4.jpg)
+### Output
 
-The `createCreds_()` function creates a password cracking module that uses the John the Ripper password cracker to crack the password hashes stored in the shadow file. It is called at the end of the `createPost_()` function.
+At the end of the script execution, the following output is displayed:
 
-![Screenshot 5](https://github.com/1337spectra/rogue/blob/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/5.jpg)
+```bash
+[!] Pentest done. All reports, files, and credentials can be found in 'Pentest'.
+```
 
+The `Pentest` directory will be created in the same directory as the script and will contain all the generated reports, files, and credentials.
+## Documentation
+
+This documentation provides an overview of each function in the penetration testing script, detailing what it is designed to do and how it accomplishes those goals. The functions work together to systematically carry out the overall testing process from start to finish.
+
+### initialize()
+
+The initialize() function sets up the necessary environment and tools for the assessment. It first checks that the script is running with root privileges. Then it performs system updates, installs required packages like PostgreSQL, and starts relevant services. Critical directories are created, such as for reports, modules, credentials, and files. The function clones a GitHub repository containing an Nmap parser and downloads additional tools from online repositories. Finally, it sets file permissions and path variables to complete the initialization stage.
+
+**Pseudocode**:
+
+```
+Check if root, update packages
+Install required packages like PostgreSQL
+Start PostgreSQL service
+Initialize MSF db
+Create directories for reports, modules, creds, files
+Clone Nmap parsing repo, download plugins
+Set directory permissions
+```
+
+### banner()
+
+**Pseudocode**:
+
+```
+Print colorful banner text with project info
+```
+
+### nmapScan()
+
+An Nmap scan is essential for discovery and vulnerability identification. The nmapScan() function executes a thorough scan of the target system using various Nmap flags, runs additional discovery scripts, and outputs results to an XML report. This centralized report, saved to the reports directory, provides valuable insights into the target for the remainder of the testing process.
+
+**Pseudocode**:
+
+```
+Print scan starting message
+Run Nmap on target with specified flags
+Save XML results
+Print scan complete message
+```
+
+### msfSetup()
+
+This function prepares the Metasploit framework for exploitation and post-exploitation actions. It imports the Nmap XML data into the Metasploit database, refreshes the host list, configures options like the local host IP, and finally exits the msfconsole. These preparatory steps integrate target reconnaissance into Metasploit to enable automated usage throughout the later functions.
+
+**Pseudocode**:
+
+```
+Print setup starting message
+Import Nmap XML, reload hosts in MSF
+Set LHOST, save config
+Print setup done message
+```
+
+### createAuto()
+
+Building on the results of nmapScan() and msfSetup(), the createAuto() function generates an automation script. This script leverages the Metasploit db_autopwn plugin to automatically discover and exploit targets. Upon gaining access, it identifies sessions including those with elevated privileges. Post-exploitation actions like credential harvesting are also chained. The end result is a module that methodically conducts the exploitation phase with minimal interaction.
+
+**Pseudocode**:
+
+```
+Create auto.rc file in modules dir
+Write commands to file:
+- Import hosts, load plugin
+- Run db_autopwn
+- Run vsftpd exploit
+- Get all sessions
+- Filter for root sessions
+- Run post.rc on root sessions
+- Gather additional data
+- Export results, clean up
+- Exit MSF
+```
+
+### createPost()
+
+Obtaining additional information from compromised hosts is critical. The createPost() function defines a Metasploit post-exploitation module to extract valuable intel like password hashes, network configurations, user histories and more. Upon completion, the target is fully profiled based on what was accessible through post-exploitation techniques alone.
+
+**Pseudocode**:
+
+```
+Create post.rc file in modules dir
+Write commands to gather:
+- Hashes, files, configs
+- Container/VM data
+- Credentials
+- Exit MSF
+```
+
+### createCreds()
+
+With credentials extracted, the final step is often cracking hashes to reverse passwords. This function utilizes John the Ripper for password recovery against the hash files. The cracked credentials are then added to the Metasploit database, completing the full penetration testing cycle from vulnerability discovery to credentials compromise.
+
+**Pseudocode**:
+
+```
+Combine passwd, shadow files
+Crack hashes with John
+Add cracked creds to MSF db
+Clean up files
+```
+
+### autopwn()
+
+The autopwn() function initiates the exploitation process by executing the previously generated auto.rc automation module. This drives the exploitation phase to completion according to the steps defined in createAuto(), without requiring manual intervention once started.
+
+**Pseudocode**:
+
+```
+Print running message
+Run MSF with auto.rc
+```
+
+### report()
+
+Wrapping up, the report() function leverages the nmap-parse-output tool to transform the detailed Nmap XML data into a formatted HTML report. This condenses the most relevant results and insights into a consumable deliverable for stakeholders.
+
+**Pseudocode**:
+
+```
+Print parsing message
+Generate HTML report from Nmap XML
+Print report done message
+```
+
+### cleanup()
+
+No testing effort is complete without cleaning up artifacts. The cleanup() function removes duplicate files, deletes empty folders and files, processes text output for reporting, strips terminal codes, and ensures the environment is restored to its initial state - all important containment and Anti-Forensics steps.
+
+**Pseudocode**:
+
+```
+Print cleanup message
+Remove duplicate files
+Process text files
+Generate extracted_files report
+Strip terminal codes
+Print cleanup done message
+```
+
+### mainf()
+
+All of the above functions are orchestrated centrally by mainf(). It prompts for the target, calls the functions in sequence, and finally packages results for delivery. One well-designed testing process is thus defined from start to finish through this driver function and modular component functions below it.
+
+**Pseudocode**:
+
+```
+Call all functions in sequence
+Package results
+Exit with finished message
+```
 ## Limitations
 
-- **Educational Use Only**: This script is intended for educational purposes and should not be used to exploit systems without proper authorization.
-- **Compatibility**: The script is designed to work with Metasploitable 2 virtual machines and may not be compatible with other versions or configurations.
-- **Operating System**: Rogue.sh is tailored for use with Kali Linux and may not function correctly on other operating systems.
-- **Deprecated Metasploit Plugin**: The `db_autpwn` plugin used in this script is deprecated in newer versions of Metasploit.
-- **Lack of Error Checking**: The script does not include comprehensive error checking or validation, so caution should be exercised while using it.
-- **Hardcoded Paths**: The script utilizes hardcoded paths to main folders and files, which may cause issues if the directory structure is modified or if the script is run on a different machine.
-- **Assumption of User**: The script assumes that the user is running under the username 'kali'.
-- **Noisiness**: Rogue.sh generates significant noise during its execution, which may be detectable by network monitoring tools.
+- Rogue requires basic penetration testing skills for usage and advanced skills for customization.
+- It is not designed to replace manual testing, but to standardize routine tasks.
+- The tool is intended for educational use only and should not be used for unauthorized exploitation of systems.
+- Compatibility is limited to Metasploitable 2 virtual machines and may not work with other versions or configurations.
+- Rogue.sh is specifically designed for Kali Linux and may not function correctly on other operating systems.
+- The `db_autpwn` plugin used in the script is deprecated in newer versions of Metasploit.
+- The script lacks comprehensive error checking or validation.
+- Hardcoded paths to main folders and files may cause issues if the directory structure is altered or the script is run on a different machine.
+- The script assumes the user is running under the username 'kali'.
+- Rogue.sh generates a significant amount of network noise during operation, which could be detected by network monitoring tools.
+## Screenshots
 
-## Contributing
+![Screenshot 1](https://rawcdn.githack.com/1337spectra/rogue/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/1.jpg)
 
-Please read [Contributing](https://github.com/1337spectra/rogue/wiki/03.-Contributing) for details on code of conduct, and the process for submitting pull requests.
+![Screenshot 2](https://rawcdn.githack.com/1337spectra/rogue/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/2.jpg)
 
+![Screenshot 3](https://rawcdn.githack.com/1337spectra/rogue/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/3.jpg)
+
+![Screenshot 4](https://rawcdn.githack.com/1337spectra/rogue/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/4.jpg)
+
+![Screenshot 5](https://rawcdn.githack.com/1337spectra/rogue/143ec64bc83bf27a3f93913f4c6678358a5cfaeb/images/5.jpg)
 ## Authors
 
-* **Gabrielle Decker** - *Initial work* - [https://1337spectra.github.io/](https://1337spectra.github.io/)
+- Gabrielle Decker: [LinkedIn](https://www.linkedin.com/in/gabrielle-decker) [GitHub](https://1337spectra.github.io/) [CodePen](https://codepen.io/gndecker)
+
 
 ## License
 
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+
 This project is licensed under the GPL v3 - see the [LICENSE.txt](https://github.com/1337spectra/rogue/blob/main/LICENSE.md) file for details
-
-
-## Acknowledgments
+## Acknowledgements
 
 * [db_autopwn.rb](https://github.com/hahwul/metasploit-autopwn)
 * [Nmap](https://github.com/nmap/nmap)
