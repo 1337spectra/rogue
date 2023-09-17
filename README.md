@@ -1,6 +1,8 @@
 
 # rogue.sh
 
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) [![CodeFactor](https://www.codefactor.io/repository/github/1337spectra/rogue/badge)](https://www.codefactor.io/repository/github/1337spectra/rogue)
+
 Rogue is a bash script designed to simplify penetration testing workflows for security professionals. It automates the scanning process with Nmap, configures Metasploit, executes exploits, harvests credentials with John the Ripper, generates professional reports, and performs cleanup. The script standardizes these processes to reduce manual labor and free analysts to concentrate on analysis. With only an IP address as input, the script aims to streamline processes while allowing experienced users to customize scans or bypass default behaviors as needed.
 
 
